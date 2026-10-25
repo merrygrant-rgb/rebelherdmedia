@@ -7,7 +7,7 @@ Nothing in this plan changes DNS, cancels anything, or takes the old site down u
 | GoDaddy product | Keep? | Why |
 |---|---|---|
 | **Domain registration** (rebelherdmedia.com) | **Yes — keep** | Netlify will host the site, not the domain. Renewals continue at GoDaddy. |
-| **Email** (mgrant@rebelherdmedia.com — GoDaddy/Microsoft 365 email) | **Yes — keep** | Email is separate from web hosting. The MX, autodiscover, and related records must survive the move untouched. |
+| **Email** — Google Workspace (info@ and mgrant@rebelherdmedia.com) | **Keep — not a GoDaddy product, but its DNS records live at GoDaddy** | Google Workspace MX, SPF (TXT), DKIM (TXT/CNAME), DMARC (TXT), and any Google site-verification TXT record must survive the move untouched. |
 | **DNS hosting** at GoDaddy | Keep (recommended) | Simplest path: leave DNS at GoDaddy and only change the two web records. Do *not* switch nameservers to Netlify — that would require recreating every email record by hand and is the easiest way to break mail. |
 | **Website Builder** subscription | Cancel **after** cutover is verified | Keep it until the new site has been live for a few days. Export nothing — there's nothing to export. |
 
@@ -17,7 +17,8 @@ In GoDaddy → Domain → DNS, screenshot or copy every record. Expected:
 - `A @` → a GoDaddy builder IP (web — this one will change)
 - `CNAME www` → the builder hostname (web — this one will change)
 - `MX @` records (mail — **do not change**)
-- `TXT @` SPF (`v=spf1 …`), DKIM CNAMEs, DMARC, `autodiscover` CNAME (mail — **do not change**)
+- `MX @` → the five Google Workspace MX hosts (mail — **do not change**)
+- `TXT @` SPF (`v=spf1 include:_spf.google.com ~all` or similar), `google._domainkey` DKIM TXT, `_dmarc` TXT, any `google-site-verification` TXT (mail/verification — **do not change**)
 
 Save this as `docs/dns-before.txt` in the repo.
 
@@ -30,7 +31,7 @@ Create a new GitHub repo `merrygrant-rgb/rebelherdmedia`, push this folder to it
 Netlify → Add new site → Import from GitHub → pick the repo. Build command: none. Publish directory: `.` (netlify.toml already says so). Netlify assigns a `something-random.netlify.app` URL. **This is the preview.** Review every page on phone and desktop there.
 
 ### 3. Verify the contact form on the preview (safe)
-Netlify detects the form from the HTML on first deploy. Submit a test from the preview URL, confirm it appears under Netlify → Forms → `inquiry`. Then set the notification: Forms → Form notifications → Add → Email → `mgrant@rebelherdmedia.com`. (Free tier: 100 submissions/month, plenty.)
+Netlify detects the form from the HTML on first deploy. Submit a test from the preview URL, confirm it appears under Netlify → Forms → `inquiry`. Then set the notification: Forms → Form notifications → Add → Email → `info@rebelherdmedia.com`. (Free tier: 100 submissions/month, plenty.)
 
 ### 4. Add the custom domain in Netlify, but don't point DNS yet (safe)
 Netlify → Domain management → Add domain → `rebelherdmedia.com`. Netlify will show it as "awaiting external DNS" and tell you the records it wants. Also add `www.rebelherdmedia.com` as an alias and set the apex as primary. Nothing is live yet.
@@ -53,7 +54,7 @@ Once DNS propagates (minutes to a few hours), Netlify → Domain management → 
 
 ### 8. Verify after cutover
 - `https://rebelherdmedia.com` and `https://www.rebelherdmedia.com` both load the new site over HTTPS.
-- Send yourself an email at mgrant@rebelherdmedia.com and reply from it — confirms MX survived.
+- Send yourself an email at info@rebelherdmedia.com and reply from it — confirms Google Workspace MX survived.
 - Submit the live contact form; confirm the notification email arrives.
 - Google Search Console: add the property (DNS TXT verification — one more record at GoDaddy, harmless) and submit `https://rebelherdmedia.com/sitemap.xml`.
 
