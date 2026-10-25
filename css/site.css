@@ -165,7 +165,7 @@ section{padding:72px 0}
 
 /* Footer */
 .site-foot{border-top:1px solid var(--line);padding:40px 0 48px;font-size:15px;color:var(--slate)}
-.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:28px}
+.foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:28px}
 .foot-grid h4{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:10px}
 .foot-grid ul{list-style:none}
 .foot-grid li+li{margin-top:7px}
