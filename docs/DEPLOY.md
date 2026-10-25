@@ -57,7 +57,7 @@ Clean URLs come from the folder structure: `/about/` serves `about/index.html`. 
 
 ## Contact form
 
-The form posts to Netlify Forms (`data-netlify="true"`, form name `inquiry`). Spam protection is a hidden honeypot field; no reCAPTCHA needed. Submissions appear in Netlify → Forms, and you set the email notification there (see MIGRATION.md step 3). If you ever rename the form, change both the `name` attribute and the hidden `form-name` input.
+The form posts to Netlify Forms (`data-netlify="true"`, form name `inquiry`). Netlify must have **form detection enabled** (Site configuration → Forms → Enable form detection) followed by a redeploy; it is off by default on new sites and the form 404s until it's on. Spam protection is a hidden honeypot field; no reCAPTCHA needed. Submissions appear in Netlify → Forms, and you set the email notification there (see MIGRATION.md step 3). If you ever rename the form, change both the `name` attribute and the hidden `form-name` input.
 
 ## Things to add before or shortly after launch
 

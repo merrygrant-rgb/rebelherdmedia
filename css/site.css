@@ -154,7 +154,7 @@ section{padding:72px 0}
 .form{max-width:620px}
 .field{margin-bottom:20px}
 .field label{display:block;font-weight:600;margin-bottom:6px}
-.field .hint{display:block;font-weight:400;color:var(--slate);font-size:14px;margin-bottom:6px}
+.field .hint{display:block;font-weight:400;color:var(--slate);font-size:14px;margin:-2px 0 6px}
 .field input,.field select,.field textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #B7AFA2;border-radius:var(--r);background:#FFFDF9;color:var(--ink)}
 .field textarea{min-height:160px;resize:vertical}
 .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--signal);outline-offset:1px;border-color:var(--signal)}

@@ -31,7 +31,7 @@ Create a new GitHub repo `merrygrant-rgb/rebelherdmedia`, push this folder to it
 Netlify → Add new site → Import from GitHub → pick the repo. Build command: none. Publish directory: `.` (netlify.toml already says so). Netlify assigns a `something-random.netlify.app` URL. **This is the preview.** Review every page on phone and desktop there.
 
 ### 3. Verify the contact form on the preview (safe)
-Netlify detects the form from the HTML on first deploy. Submit a test from the preview URL, confirm it appears under Netlify → Forms → `inquiry`. Then set the notification: Forms → Form notifications → Add → Email → `info@rebelherdmedia.com`. (Free tier: 100 submissions/month, plenty.)
+**First enable form detection** — it is off by default on new Netlify sites: Site configuration → Forms → Enable form detection, then Deploys → Trigger deploy so Netlify re-scans the HTML. Until this is done, submitting the form returns a 404. Then Netlify detects the form from the HTML. Submit a test from the preview URL, confirm it appears under Netlify → Forms → `inquiry`. Then set the notification: Forms → Form notifications → Add → Email → `info@rebelherdmedia.com`. (Free tier: 100 submissions/month, plenty.)
 
 ### 4. Add the custom domain in Netlify, but don't point DNS yet (safe)
 Netlify → Domain management → Add domain → `rebelherdmedia.com`. Netlify will show it as "awaiting external DNS" and tell you the records it wants. Also add `www.rebelherdmedia.com` as an alias and set the apex as primary. Nothing is live yet.
