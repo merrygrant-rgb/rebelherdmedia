@@ -221,3 +221,17 @@ section{padding:72px 0}
 /* Footer legal row */
 .foot-legal{list-style:none;display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-size:13.5px}
 .foot-legal a{color:var(--slate);text-decoration:none}.foot-legal a:hover{color:var(--ink);text-decoration:underline}
+
+/* Intake forms */
+.intake{max-width:680px}
+.intake-h{font-size:clamp(22px,3vw,28px);margin:40px 0 18px;padding-top:24px;border-top:1px solid var(--line)}
+.intake-h:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.field .hint{display:block;font-weight:400;color:var(--slate);font-size:14px;margin:-2px 0 6px}
+.levels{border:0;padding:0;margin:0 0 22px}
+.levels legend{font-weight:600;margin-bottom:10px;padding:0}
+.levels legend .hint{font-weight:400;margin-top:2px}
+.form .lvl{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:14px 16px;border:1px solid #B7AFA2;border-radius:var(--r);background:#FFFDF9;margin-bottom:10px;cursor:pointer}
+.lvl:has(input:checked){border-color:var(--signal);background:rgba(14,95,107,.06)}
+.form .lvl input{width:auto;height:auto;margin:5px 0 0;accent-color:var(--signal)}
+.lvl strong{display:block;font-weight:600}
+.lvl em{font-style:normal;color:var(--ink-2);font-size:15px}

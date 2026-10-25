@@ -108,3 +108,10 @@
 
 **Rollback**
 - The old GoDaddy site is untouched and stays live until the DNS step in MIGRATION.md. Its full content is recorded in AUDIT.md (there was one page). The previous version of this build (pre-Open Water) is in `rebelherdmedia-site.zip` delivered the morning of 2026-10-24; keep that zip as the rollback copy, or rely on git history once the repo exists.
+
+## 2026-10-25 — Client intake forms (unlisted)
+- Added `/intake/audio/`, `/intake/ai/`, `/intake/brand/` — plain-language intake questionnaires, one per practice. Netlify Forms (`intake-audio`, `intake-ai`, `intake-brand`); same honeypot; post to `/thanks/`.
+- Not in the nav, footer, or sitemap; `noindex, nofollow`. Send the link to a prospect after first contact.
+- Each form opens with a "Where are you starting from?" self-rating (new / some / pro) so the first call uses the right vocabulary.
+- CSS: `.intake`, `.intake-h`, `.levels`, `.lvl`.
+- After pushing: Netlify needs a redeploy to detect the three new forms, then add email notifications for each (Forms → Form notifications → Email → info@) — the `inquiry` notification does not cover them.

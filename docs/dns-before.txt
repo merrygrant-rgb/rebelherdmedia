@@ -1,0 +1,31 @@
+rebelherdmedia.com — GoDaddy DNS records as of 2026-10-25 09:54 CT, BEFORE Netlify cutover
+(rollback reference; from Merry's screenshots)
+
+TYPE   NAME                 DATA                                                         TTL
+A      @                    WebsiteBuilder Site   (GoDaddy builder IP — THIS ROW CHANGES)        1h
+NS     @                    ns39.domaincontrol.com.                                      1h   (locked)
+NS     @                    ns40.domaincontrol.com.                                      1h   (locked)
+CNAME  pay                  paylinks.commerce.godaddy.com.                               1h
+CNAME  www                  rebelherdmedia.com.   (THIS ROW CHANGES)                     1h
+CNAME  _domainconnect       _domainconnect.gd.domaincontrol.com.                         1h
+SOA    @                    Primary nameserver: ns39.domaincontrol.com.                  1h   (locked)
+MX     @                    aspmx.l.google.com.        (Priority 1)                      1h   KEEP
+MX     @                    alt1.aspmx.l.google.com.   (Priority 5)                      1h   KEEP
+MX     @                    alt2.aspmx.l.google.com.   (Priority 5)                      1h   KEEP
+MX     @                    alt3.aspmx.l.google.com.   (Priority 10)                     1h   KEEP
+MX     @                    alt4.aspmx.l.google.com.   (Priority 10)                     1h   KEEP
+TXT    @                    2048                                                         30m
+TXT    @                    google-site-verification=cZ_TvF-xlfr-EauCP64ZvG1_pH7cGFARa8u1SK5N-Aw   1h   KEEP
+TXT    @                    v=spf1 include:dc-aa8e722993._spfm.rebelherdmedia.com ~all   1h   KEEP
+TXT    dc-aa8e722993._spfm  v=spf1 include:_spf.google.com ~all                          1h   KEEP
+TXT    _dmarc               v=DMARC1; p=quarantine; adkim=r; aspf=r; rua=mailto:dmarc_rua@onsecureserver.net;   1h   KEEP
+
+Cutover changes (and nothing else):
+  A      @     -> Netlify load balancer IP as shown in Netlify Domain management (75.2.60.5 at time of writing)
+  CNAME  www   -> dulcet-zabaione-0d9c8e.netlify.app
+
+Rollback: set A @ back to the GoDaddy "WebsiteBuilder Site" value and CNAME www back to rebelherdmedia.com.
+
+Post-launch note (not part of cutover): there is no google._domainkey DKIM record. Google Workspace DKIM signing
+is not set up for this domain; worth doing in Workspace Admin -> Apps -> Gmail -> Authenticate email, then adding
+the TXT record it gives you. Improves deliverability of info@ mail. Also consider a DMARC rua address you control.

@@ -36,6 +36,7 @@ services/acoustic-design/index.html
 services/ai-strategy/index.html
 services/digital-media/index.html
 contact/index.html                 inquiry form (Netlify Forms)
+intake/audio|ai|brand/index.html   client intake questionnaires (unlisted, noindex; Netlify Forms)
 thanks/index.html                  form success page (noindex)
 404.html                           not-found page
 css/site.css                       all styles; colors/fonts are the tokens at the top
@@ -58,6 +59,8 @@ Clean URLs come from the folder structure: `/about/` serves `about/index.html`. 
 ## Contact form
 
 The form posts to Netlify Forms (`data-netlify="true"`, form name `inquiry`). Netlify must have **form detection enabled** (Site configuration → Forms → Enable form detection) followed by a redeploy; it is off by default on new sites and the form 404s until it's on. Spam protection is a hidden honeypot field; no reCAPTCHA needed. Submissions appear in Netlify → Forms, and you set the email notification there (see MIGRATION.md step 3). If you ever rename the form, change both the `name` attribute and the hidden `form-name` input.
+
+The three intake forms (`intake-audio`, `intake-ai`, `intake-brand`) work the same way. Netlify only detects a new form on a deploy, so after they first go live, check Netlify → Forms lists all four, then add an email notification for each new one — notifications are per form.
 
 ## Things to add before or shortly after launch
 
