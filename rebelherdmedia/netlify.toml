@@ -1,0 +1,24 @@
+# Rebel Herd Media — Netlify configuration
+# No build step: the repo root is the site.
+[build]
+  publish = "."
+
+# Send www to the bare domain (set rebelherdmedia.com as the primary domain in Netlify too)
+[[redirects]]
+  from = "https://www.rebelherdmedia.com/*"
+  to = "https://rebelherdmedia.com/:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
