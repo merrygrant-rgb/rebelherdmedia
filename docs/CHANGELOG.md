@@ -120,4 +120,4 @@
 - About page: headshot beside the founder bio (two columns on desktop, stacked on phone). Responsive WebP + JPG at 600/900/1200 px in `img/`.
 - Person JSON-LD now includes `image`.
 - `brand/social/merry-grant-headshot-square-1000.jpg` for LinkedIn, Google Business Profile, etc.; full-size original alongside it.
-- About: photo caption now "Merry Grant | Founder & AI Workflow Architect".
+- About: photo caption is Merry Grant / Founder & Principal / Acoustic design · AI workflow · Digital media. JSON-LD jobTitle "Founder & Principal, Rebel Herd Media LLC".
