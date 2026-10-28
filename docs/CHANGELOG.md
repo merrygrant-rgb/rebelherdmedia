@@ -115,3 +115,8 @@
 - Each form opens with a "Where are you starting from?" self-rating (new / some / pro) so the first call uses the right vocabulary.
 - CSS: `.intake`, `.intake-h`, `.levels`, `.lvl`.
 - After pushing: Netlify needs a redeploy to detect the three new forms, then add email notifications for each (Forms → Form notifications → Email → info@) — the `inquiry` notification does not cover them.
+
+## 2026-10-27 — Founder headshot
+- About page: headshot beside the founder bio (two columns on desktop, stacked on phone). Responsive WebP + JPG at 600/900/1200 px in `img/`.
+- Person JSON-LD now includes `image`.
+- `brand/social/merry-grant-headshot-square-1000.jpg` for LinkedIn, Google Business Profile, etc.; full-size original alongside it.

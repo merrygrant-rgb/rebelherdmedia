@@ -235,3 +235,14 @@ section{padding:72px 0}
 .form .lvl input{width:auto;height:auto;margin:5px 0 0;accent-color:var(--signal)}
 .lvl strong{display:block;font-weight:600}
 .lvl em{font-style:normal;color:var(--ink-2);font-size:15px}
+
+/* About: founder headshot */
+.about-grid{display:grid;grid-template-columns:minmax(240px,360px) 1fr;gap:56px;align-items:start}
+.about-grid .prose{max-width:66ch}
+.headshot{margin:0;position:sticky;top:96px}
+.headshot img{display:block;width:100%;height:auto;border-radius:var(--r);box-shadow:0 1px 0 rgba(27,34,39,.06),0 18px 40px -24px rgba(14,95,107,.45)}
+.headshot figcaption{margin-top:10px;font-size:14px;color:var(--slate)}
+@media (max-width:760px){
+ .about-grid{grid-template-columns:1fr;gap:28px}
+ .headshot{position:static;max-width:320px}
+}
