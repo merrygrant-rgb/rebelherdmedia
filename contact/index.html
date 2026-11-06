@@ -34,17 +34,39 @@
 <p class="lede">A few sentences in whatever words you have is enough. You don't need a budget, a spec, or a plan. You'll hear back from a person, usually within two business days, with either a straight answer or a time to talk.</p>
 </div></section>
 <section><div class="wrap contact-grid">
-<form class="form" name="inquiry" method="POST" action="/thanks/" data-netlify="true" netlify-honeypot="company-website">
+<form class="form" name="inquiry" method="POST" action="/.netlify/functions/inquiry" data-netlify="true" netlify-honeypot="company-website" novalidate>
 <input type="hidden" name="form-name" value="inquiry">
 <p class="hp"><label>Leave this field empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
-<div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" required autocomplete="name"></div>
-<div class="field"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
+<div class="form-summary" id="form-summary" role="alert" tabindex="-1" hidden><p><strong>Please check the highlighted fields.</strong></p><ul id="form-summary-list"></ul></div>
+<div class="field"><label for="name">Your name <span class="req" aria-hidden="true">(required)</span></label><input id="name" name="name" type="text" required pattern=".*\S.*" autocomplete="name" aria-describedby="name-error" aria-invalid="false"><p class="error" id="name-error" aria-live="polite"></p></div>
+<div class="field"><label for="email">Email <span class="req" aria-hidden="true">(required)</span></label><input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-error" aria-invalid="false"><p class="error" id="email-error" aria-live="polite"></p></div>
 <div class="field"><label for="org">Company or organization</label><span class="hint" id="org-hint">Optional</span><input id="org" name="organization" type="text" autocomplete="organization" aria-describedby="org-hint"></div>
-<div class="field"><label for="topic">What is this about?</label>
-<select id="topic" name="topic" required><option value="">Choose one</option><option>I'm not sure — I'll describe it</option><option>Commercial audio or paging system</option><option>School or athletic facility audio</option><option>Sound masking or speech privacy</option><option>Acoustic treatment (echo, reverberation)</option><option>Assistive listening</option><option>Review of a proposal or quote I already have</option><option>AI adoption or training</option><option>Responsible AI practices or workflow strategy</option><option>Website, brand, or content</option><option>Something else</option></select></div>
-<div class="field"><label for="message">Tell us about it</label><span class="hint" id="message-hint">Plain words are fine; you don't need the right terminology. What the space, team, or brand is, what's going wrong, and any date you're working against. Please don't paste or describe confidential drawings, architectural plans, or restricted business information here; we'll set up a private way to share those once we're talking.</span><textarea id="message" name="message" required aria-describedby="message-hint"></textarea></div>
+<div class="field"><label for="topic">What is this about?</label><span class="hint" id="topic-hint">Optional. Skip it if none of these fit; just describe it below.</span>
+<select id="topic" name="topic" aria-describedby="topic-hint"><option value="">Choose one, or leave blank</option><option>I'm not sure — I'll describe it</option><option>Commercial audio or paging system</option><option>School or athletic facility audio</option><option>Sound masking or speech privacy</option><option>Acoustic treatment (echo, reverberation)</option><option>Assistive listening</option><option>Review of a proposal or quote I already have</option><option>AI adoption or training</option><option>Responsible AI practices or workflow strategy</option><option>Website, brand, or content</option><option>Something else</option></select></div>
+<div class="field"><label for="message">Tell us about it <span class="req" aria-hidden="true">(required)</span></label><span class="hint" id="message-hint">Plain words are fine; you don't need the right terminology. What the space, team, or brand is, what's going wrong, and any date you're working against. A sentence or two is enough. Please don't paste or describe confidential drawings, architectural plans, or restricted business information here; we'll set up a private way to share those once we're talking.</span><textarea id="message" name="message" required minlength="20" aria-describedby="message-hint message-error" aria-invalid="false"></textarea><p class="error" id="message-error" aria-live="polite"></p></div>
 <button class="btn" type="submit">Send inquiry</button>
 </form>
+<script>
+(function(){
+  var f=document.querySelector('form[name="inquiry"]');if(!f)return;
+  var rules={
+    name:{el:f.elements.name,test:function(v){return v.trim().length>0},msg:"Please enter your name."},
+    email:{el:f.elements.email,test:function(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim())},msg:"Please enter a valid email address, like name@example.com."},
+    message:{el:f.elements.message,test:function(v){return v.replace(/\s/g,'').length>=20},msg:"Please tell us a little more — at least a sentence (20 characters or more)."}
+  };
+  function show(k,bad){var r=rules[k],e=document.getElementById(k+'-error');r.el.setAttribute('aria-invalid',bad?'true':'false');r.el.closest('.field').classList.toggle('invalid',bad);e.textContent=bad?r.msg:'';}
+  function check(k){var r=rules[k],bad=!r.test(r.el.value);show(k,bad);return !bad;}
+  var attempted=false;
+  Object.keys(rules).forEach(function(k){rules[k].el.addEventListener('blur',function(){if(attempted)check(k)});rules[k].el.addEventListener('input',function(){if(rules[k].el.getAttribute('aria-invalid')==='true')check(k)});});
+  f.addEventListener('submit',function(ev){
+    attempted=true;
+    var failed=Object.keys(rules).filter(function(k){return !check(k)});
+    var sum=document.getElementById('form-summary'),list=document.getElementById('form-summary-list');
+    if(failed.length){ev.preventDefault();list.innerHTML='';failed.forEach(function(k){var li=document.createElement('li'),a=document.createElement('a');a.href='#'+k;a.textContent=rules[k].msg;li.appendChild(a);list.appendChild(li)});sum.hidden=false;sum.focus();}
+    else{sum.hidden=true;}
+  });
+})();
+</script>
 <aside class="contact-aside">
 <h3>Prefer email?</h3><p><a href="mailto:info@rebelherdmedia.com">info@rebelherdmedia.com</a></p>
 <h3 style="margin-top:28px">If you have plans</h3><p>Floor plans (PDF or CAD) and a couple of phone photos of the ceiling are the fastest way to a useful first answer on any acoustic project. Mention that you have them and we'll send you a private way to share them.</p>

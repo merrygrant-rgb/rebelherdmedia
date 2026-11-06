@@ -22,3 +22,15 @@
   for = "/css/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"
+
+# Serverless functions (server-side validation for the inquiry form)
+[functions]
+  directory = "netlify/functions"
+  node_bundler = "esbuild"
+
+# The publish directory is the repo root; never serve function sources as static files.
+[[redirects]]
+  from = "/netlify/*"
+  to = "/404.html"
+  status = 404
+  force = true

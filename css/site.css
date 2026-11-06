@@ -157,6 +157,14 @@ section{padding:72px 0}
 .field .hint{display:block;font-weight:400;color:var(--slate);font-size:14px;margin:-2px 0 6px}
 .field input,.field select,.field textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid #B7AFA2;border-radius:var(--r);background:#FFFDF9;color:var(--ink)}
 .field textarea{min-height:160px;resize:vertical}
+.field .req{font-weight:400;color:var(--slate);font-size:14px}
+.field .error{display:block;color:#9A2A2A;font-size:14.5px;margin:6px 0 0;min-height:0}
+.field .error:empty{display:none}
+.field.invalid input,.field.invalid textarea{border-color:#9A2A2A;border-width:2px}
+.form-summary{border:2px solid #9A2A2A;border-radius:var(--r);background:#FBEFEF;padding:14px 16px;margin-bottom:22px;color:var(--ink)}
+.form-summary ul{margin:8px 0 0 18px}
+.form-summary a{color:#9A2A2A;font-weight:600}
+.form-summary:focus{outline:2px solid #9A2A2A;outline-offset:2px}
 .field input:focus,.field select:focus,.field textarea:focus{outline:2px solid var(--signal);outline-offset:1px;border-color:var(--signal)}
 .hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
 .contact-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:56px}
