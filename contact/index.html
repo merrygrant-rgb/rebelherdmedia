@@ -16,17 +16,18 @@
 <meta name="theme-color" content="#0E5F6B">
 <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:opsz,wght,SOFT@9..144,600,60&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css">
+<link rel="stylesheet" href="/css/site.css?v=20261106">
+<script src="/js/site.js?v=20261106" defer></script>
 
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><nav class="nav" aria-label="Main">
 <a class="brand" href="/" aria-label="Rebel Herd Media, home">rebel herd<span class="dot">.</span><small>media</small></a>
-<button class="menu-btn" aria-expanded="false" aria-controls="menu" onclick="var m=document.getElementById('menu');var o=m.classList.toggle('open');this.setAttribute('aria-expanded',o)">Menu</button>
-<ul class="menu" id="menu"><li><a href="/services/acoustic-design/">Acoustic design</a></li><li><a href="/services/ai-strategy/">AI strategy</a></li><li><a href="/services/digital-media/">Digital media</a></li><li><a href="/knowledge-center/">Knowledge Center</a></li><li><a href="/about/">About</a></li><li><a class="cta" href="/contact/">Start a conversation</a></li></ul>
+<button class="menu-btn" type="button" aria-expanded="false" aria-controls="menu">Menu</button>
+<ul class="menu" id="menu"><li><a href="/services/acoustic-design/">Acoustic design</a></li><li><a href="/services/ai-strategy/">AI strategy</a></li><li><a href="/services/digital-media/">Digital media</a></li><li><a href="/about/">About</a></li><li><a class="cta" href="/contact/">Start a conversation</a></li></ul>
 </nav></header>
-<main id="main">
+<main id="main" tabindex="-1">
 
 <section class="page-intro"><div class="wrap">
 <div class="crumb"><a href="/">Home</a> / Contact</div>
@@ -36,7 +37,7 @@
 <section><div class="wrap contact-grid">
 <form class="form" name="inquiry" method="POST" action="/.netlify/functions/inquiry" data-netlify="true" netlify-honeypot="company-website" novalidate>
 <input type="hidden" name="form-name" value="inquiry">
-<p class="hp"><label>Leave this field empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
+<p class="hp" aria-hidden="true"><label>Leave this field empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
 <div class="form-summary" id="form-summary" role="alert" tabindex="-1" hidden><p><strong>Please check the highlighted fields.</strong></p><ul id="form-summary-list"></ul></div>
 <div class="field"><label for="name">Your name <span class="req" aria-hidden="true">(required)</span></label><input id="name" name="name" type="text" required pattern=".*\S.*" autocomplete="name" aria-describedby="name-error" aria-invalid="false"><p class="error" id="name-error" aria-live="polite"></p></div>
 <div class="field"><label for="email">Email <span class="req" aria-hidden="true">(required)</span></label><input id="email" name="email" type="email" required autocomplete="email" aria-describedby="email-error" aria-invalid="false"><p class="error" id="email-error" aria-live="polite"></p></div>
@@ -68,19 +69,18 @@
 })();
 </script>
 <aside class="contact-aside">
-<h3>Prefer email?</h3><p><a href="mailto:info@rebelherdmedia.com">info@rebelherdmedia.com</a></p>
-<h3 style="margin-top:28px">If you have plans</h3><p>Floor plans (PDF or CAD) and a couple of phone photos of the ceiling are the fastest way to a useful first answer on any acoustic project. Mention that you have them and we'll send you a private way to share them.</p>
-<h3 style="margin-top:28px">Where we are</h3><p>Dallas, Georgia. Design and strategy work is done remotely for clients anywhere in the United States.</p>
+<h2 class="h3">Prefer to call or email?</h2><p><a href="tel:+17704646150">(770) 464-6150</a><br><a href="mailto:info@rebelherdmedia.com">info@rebelherdmedia.com</a></p>
+<h2 class="h3" style="margin-top:28px">If you have plans</h3><p>Floor plans (PDF or CAD) and a couple of phone photos of the ceiling are the fastest way to a useful first answer on any acoustic project. Mention that you have them and we'll send you a private way to share them.</p>
+<h2 class="h3" style="margin-top:28px">Where we are</h3><p>Dallas, Georgia. Design and strategy work is done remotely for clients anywhere in the United States.</p>
 </aside>
 </div></section>
 </main>
 <footer class="site-foot"><div class="wrap">
 <div class="foot-grid">
 <div><div class="wm" style="font-size:22px;color:var(--signal);margin-bottom:10px">rebel herd<span class="dot">.</span></div><p>Independent, woman-owned consulting and digital media: acoustic design, practical AI adoption, and brand development. One person scopes the work, does the work, and answers for it.</p></div>
-<div><h4>Services</h4><ul><li><a href="/services/acoustic-design/">Acoustic design &amp; consulting</a></li><li><a href="/services/ai-strategy/">AI strategy &amp; workflow architecture</a></li><li><a href="/services/digital-media/">Digital media &amp; brand development</a></li></ul></div>
-<div><h4>Learn</h4><ul><li><a href="/knowledge-center/">Knowledge Center</a></li><li><a href="/knowledge-center/acoustic-design/">Acoustic design guides</a></li></ul></div>
-<div><h4>Company</h4><ul><li><a href="/about/">About the founder</a></li><li><a href="/contact/">Contact</a></li><li><a href="mailto:info@rebelherdmedia.com">info@rebelherdmedia.com</a></li></ul></div>
-<div><h4>Follow</h4><ul><li><a href="https://www.youtube.com/@RebelHerdMedia" rel="me noopener" target="_blank">YouTube</a></li><li><a href="https://www.linkedin.com/company/rebel-herd-media/" rel="me noopener" target="_blank">LinkedIn</a></li><li><a href="https://www.facebook.com/profile.php?id=61595892838745" rel="me noopener" target="_blank">Facebook</a></li><li><a href="https://www.instagram.com/rebelherdmedia/" rel="me noopener" target="_blank">Instagram</a></li><li><a href="https://www.tiktok.com/@rebel.herd.media" rel="me noopener" target="_blank">TikTok</a></li></ul></div>
+<div><h2>Services</h2><ul><li><a href="/services/acoustic-design/">Acoustic design &amp; consulting</a></li><li><a href="/services/ai-strategy/">AI strategy &amp; workflow architecture</a></li><li><a href="/services/digital-media/">Digital media &amp; brand development</a></li></ul></div>
+<div><h2>Company</h2><ul><li><a href="/about/">About the founder</a></li><li><a href="/contact/">Contact</a></li><li><a href="mailto:info@rebelherdmedia.com">info@rebelherdmedia.com</a></li></ul></div>
+<div><h2>Follow</h2><ul><li><a href="https://www.youtube.com/@RebelHerdMedia" rel="me noopener" target="_blank">YouTube</a></li><li><a href="https://www.linkedin.com/company/rebel-herd-media/" rel="me noopener" target="_blank">LinkedIn</a></li><li><a href="https://www.facebook.com/profile.php?id=61595892838745" rel="me noopener" target="_blank">Facebook</a></li><li><a href="https://www.instagram.com/rebelherdmedia/" rel="me noopener" target="_blank">Instagram</a></li><li><a href="https://www.tiktok.com/@rebel.herd.media" rel="me noopener" target="_blank">TikTok</a></li></ul></div>
 </div>
 <div class="foot-bottom"><span>&copy; 2026 Rebel Herd Media LLC. Dallas, Georgia.</span><span>Independent consulting. Equipment recommendations are based on project requirements, not product sales.</span></div>
 <ul class="foot-legal"><li><a href="/privacy/">Privacy</a></li><li><a href="/terms/">Terms of use &amp; professional services disclaimer</a></li><li><a href="/accessibility/">Accessibility</a></li></ul>
