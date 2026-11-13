@@ -60,7 +60,7 @@
   function show(k,bad){var r=rules[k],e=document.getElementById(k+'-error');r.el.setAttribute('aria-invalid',bad?'true':'false');r.el.closest('.field').classList.toggle('invalid',bad);e.textContent=bad?r.msg:'';}
   function check(k){var r=rules[k],bad=!r.test(r.el.value);show(k,bad);return !bad;}
   var attempted=false;
-  Object.keys(rules).forEach(function(k){rules[k].el.addEventListener('blur',function(){if(attempted)check(k)});rules[k].el.addEventListener('input',function(){if(rules[k].el.getAttribute('aria-invalid')==='true')check(k)});});
+  Object.keys(rules).forEach(function(k){rules[k].el.addEventListener('blur',function(){if(attempted)setTimeout(function(){check(k)},250)});rules[k].el.addEventListener('input',function(){if(rules[k].el.getAttribute('aria-invalid')==='true')check(k)});});
   f.addEventListener('submit',function(ev){
     attempted=true;
     var failed=Object.keys(rules).filter(function(k){return !check(k)});

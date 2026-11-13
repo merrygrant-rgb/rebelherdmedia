@@ -11,6 +11,14 @@ export const CONSENT_VERSION = "2026-11-v1";
 export const CONSENT_TEXT = "Yes, I'd like to receive occasional emails from Rebel Herd Media, including Knowledge Center articles, practical business tips, company news, educational resources, and special offers. I understand I can unsubscribe at any time.";
 export const RECOGNITION_VERSION = "2026-11-v2"; // v2: "selected for the Rebel Herd Initiative" wording
 
+/**
+ * Operational log line for Netlify function logs. Never include names, email addresses or form answers:
+ * the timestamp lets an administrator match the line to the stored submission in Netlify Forms.
+ */
+export function log(event, detail = {}) {
+  try { console.error(JSON.stringify({ rhm: event, at: new Date().toISOString(), ...detail })); } catch (e) { /* logging must never break a submission */ }
+}
+
 export const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 export const isEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(e ?? "").trim());
 
@@ -37,8 +45,10 @@ export async function forwardToNetlifyForms(req, formName, fields) {
     body.set("form-name", formName);
     for (const [k, v] of Object.entries(fields)) body.set(k, v ?? "");
     const res = await fetch(new URL("/", req.url), { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body });
-    return res.ok || res.status === 303 || res.status === 302;
-  } catch (e) { return false; }
+    const ok = res.ok || res.status === 303 || res.status === 302;
+    if (!ok) log("form-storage-failed", { form: formName, status: res.status });
+    return ok;
+  } catch (e) { log("form-storage-failed", { form: formName, status: "network" }); return false; }
 }
 
 /**
@@ -75,7 +85,7 @@ const brevo = (path, payload) => fetch(`https://api.brevo.com/v3${path}`, {
  * Never enrolls directly. Never throws.
  */
 export async function brevoOptIn({ email, firstName = "", source = "", topics = [], req }) {
-  if (!process.env.BREVO_API_KEY || !process.env.BREVO_LIST_ID || !process.env.BREVO_DOI_TEMPLATE_ID) return "skipped:not-configured";
+  if (!process.env.BREVO_API_KEY || !process.env.BREVO_LIST_ID || !process.env.BREVO_DOI_TEMPLATE_ID) { log("doi-skipped-not-configured", { source }); return "skipped:not-configured"; }
   try {
     const r = await brevo("/contacts/doubleOptinConfirmation", {
       email,
@@ -84,13 +94,15 @@ export async function brevoOptIn({ email, firstName = "", source = "", topics = 
       templateId: Number(process.env.BREVO_DOI_TEMPLATE_ID),
       redirectionUrl: new URL("/knowledge-center/subscribed/?confirmed=1", req.url).toString(),
     });
-    return r.ok || r.status === 204 ? "doi-sent" : `error:${r.status}`;
-  } catch (e) { return "error:network"; }
+    if (r.ok || r.status === 204) return "doi-sent";
+    log("doi-failed", { source, status: r.status });
+    return `error:${r.status}`;
+  } catch (e) { log("doi-failed", { source, status: "network" }); return "error:network"; }
 }
 
 /** Plain transactional email (confirmations). Callers must esc() any user-supplied text in `html`. Never throws. */
 export async function sendTransactional({ to, toName = "", subject, text, html }) {
-  if (!process.env.BREVO_API_KEY || !process.env.BREVO_SENDER_EMAIL) return "skipped:not-configured";
+  if (!process.env.BREVO_API_KEY || !process.env.BREVO_SENDER_EMAIL) { log("confirmation-email-skipped-not-configured", {}); return "skipped:not-configured"; }
   try {
     const r = await brevo("/smtp/email", {
       sender: { email: process.env.BREVO_SENDER_EMAIL, name: process.env.BREVO_SENDER_NAME || "Rebel Herd Media" },
@@ -98,8 +110,10 @@ export async function sendTransactional({ to, toName = "", subject, text, html }
       replyTo: { email: "info@rebelherdmedia.com", name: "Rebel Herd Media" },
       subject, textContent: text, htmlContent: html,
     });
-    return r.ok ? "sent" : `error:${r.status}`;
-  } catch (e) { return "error:network"; }
+    if (r.ok) return "sent";
+    log("confirmation-email-failed", { status: r.status });
+    return `error:${r.status}`;
+  } catch (e) { log("confirmation-email-failed", { status: "network" }); return "error:network"; }
 }
 
 function shell(title, inner) {

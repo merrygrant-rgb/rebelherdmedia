@@ -1,7 +1,7 @@
 // Rebel Herd Media — server-side validation for the public inquiry form.
 // Receives the POST from /contact/, validates, and forwards valid submissions
 // to Netlify Forms (form "inquiry"), so storage and email notifications are unchanged.
-import { consentStamp, brevoOptIn, failurePage } from "../lib/consent.mjs";
+import { consentStamp, brevoOptIn, failurePage, log } from "../lib/consent.mjs";
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 export default async (req, context) => {
@@ -38,8 +38,8 @@ export default async (req, context) => {
   const target = new URL("/", req.url);
   let res;
   try { res = await fetch(target, { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body }); }
-  catch (e) { return failurePage("inquiry", "/contact/"); }
-  if (!res.ok && res.status !== 303 && res.status !== 302) return failurePage("inquiry", "/contact/");
+  catch (e) { log("form-storage-failed", { form: "inquiry", status: "network" }); return failurePage("inquiry", "/contact/"); }
+  if (!res.ok && res.status !== 303 && res.status !== 302) { log("form-storage-failed", { form: "inquiry", status: res.status }); return failurePage("inquiry", "/contact/"); }
   if (stamp.marketing_consent === "yes") await brevoOptIn({ email: email.trim(), firstName: name.trim().split(/\s+/)[0], source: "inquiry", req });
   return Response.redirect(new URL("/thanks/", req.url), 303);
 };
