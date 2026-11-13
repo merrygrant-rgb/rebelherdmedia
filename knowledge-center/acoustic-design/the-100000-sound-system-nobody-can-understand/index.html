@@ -16,7 +16,7 @@
 <meta name="theme-color" content="#0E5F6B">
 <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:opsz,wght,SOFT@9..144,600,60&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css?v=20261106">
+<link rel="stylesheet" href="/css/site.css?v=20261112">
 <script src="/js/site.js?v=20261106" defer></script>
 
 </head>
@@ -156,6 +156,26 @@
 <p class="art-related"><em>Related reading: <a href="/knowledge-center/acoustic-design/your-av-proposal-looks-impressive/">Your AV proposal looks impressive. But what are you actually buying?</a></em></p>
 
 </article>
+<aside class="kc-sub" id="subscribe" aria-labelledby="kc-sub-h">
+<div class="kc-sub-in">
+<div><p class="mono">Knowledge Center updates</p><h2 id="kc-sub-h">Good information shouldn't require a sales pitch.</h2><p>Get practical insights on commercial audio, AI, and digital business ownership. No unnecessary jargon. No inbox avalanche. Just useful information when we have something worth sharing.</p></div>
+<form class="form" name="subscribe" method="POST" action="/.netlify/functions/subscribe" data-netlify="true" netlify-honeypot="company-website">
+<input type="hidden" name="form-name" value="subscribe">
+<p class="hp" aria-hidden="true"><label>Leave this field empty: <input name="company-website" tabindex="-1" autocomplete="off"></label></p>
+<div class="field two"><div><label for="sub-first">First name</label><span class="hint">Optional</span><input id="sub-first" name="first_name" type="text" autocomplete="given-name"></div><div><label for="sub-email">Email <span class="req" aria-hidden="true">(required)</span></label><input id="sub-email" name="email" type="email" required autocomplete="email"></div></div>
+<fieldset class="field topics"><legend>What are you interested in? <span class="hint">Optional — leave them all unchecked for everything.</span></legend>
+<label><input type="checkbox" name="topics" value="acoustic"> Acoustic design &amp; commercial audio</label>
+<label><input type="checkbox" name="topics" value="ai"> AI strategy &amp; practical workflows</label>
+<label><input type="checkbox" name="topics" value="digital"> Websites, digital ownership &amp; brand development</label>
+<label><input type="checkbox" name="topics" value="all"> All Knowledge Center updates</label>
+</fieldset>
+<div class="field consent"><input id="sub-consent" name="marketing_consent" type="checkbox" value="yes" required><label for="sub-consent">Yes, I'd like to receive occasional emails from Rebel Herd Media, including Knowledge Center articles, practical business tips, company news, educational resources, and special offers. I understand I can unsubscribe at any time. <span class="req" aria-hidden="true">(required to subscribe)</span> <span class="hint">See our <a href="/privacy/#marketing-emails">privacy policy</a>.</span></label></div>
+<input type="hidden" name="consent_version" value="2026-11-v1"><input type="hidden" name="consent_text_sha256" value=""><input type="hidden" name="submitted_at" value="">
+<button class="btn" type="submit">Get Knowledge Center updates</button>
+</form>
+</div>
+</aside>
+
 </main>
 <footer class="site-foot"><div class="wrap">
 <div class="foot-grid">

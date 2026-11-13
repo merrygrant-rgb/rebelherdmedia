@@ -16,7 +16,7 @@
 <meta name="theme-color" content="#0E5F6B">
 <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Fraunces:opsz,wght,SOFT@9..144,600,60&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/css/site.css?v=20261106">
+<link rel="stylesheet" href="/css/site.css?v=20261112">
 <script src="/js/site.js?v=20261106" defer></script>
 
 </head>
@@ -45,6 +45,8 @@
 <div class="field"><label for="topic">What is this about?</label><span class="hint" id="topic-hint">Optional. Skip it if none of these fit; just describe it below.</span>
 <select id="topic" name="topic" aria-describedby="topic-hint"><option value="">Choose one, or leave blank</option><option>I'm not sure — I'll describe it</option><option>Commercial audio or paging system</option><option>School or athletic facility audio</option><option>Sound masking or speech privacy</option><option>Acoustic treatment (echo, reverberation)</option><option>Assistive listening</option><option>Review of a proposal or quote I already have</option><option>AI adoption or training</option><option>Responsible AI practices or workflow strategy</option><option>Website, brand, or content</option><option>Something else</option></select></div>
 <div class="field"><label for="message">Tell us about it <span class="req" aria-hidden="true">(required)</span></label><span class="hint" id="message-hint">Plain words are fine; you don't need the right terminology. What the space, team, or brand is, what's going wrong, and any date you're working against. A sentence or two is enough. Please don't paste or describe confidential drawings, architectural plans, or restricted business information here; we'll set up a private way to share those once we're talking.</span><textarea id="message" name="message" required minlength="20" aria-describedby="message-hint message-error" aria-invalid="false"></textarea><p class="error" id="message-error" aria-live="polite"></p></div>
+<div class="field consent"><input id="marketing_consent" name="marketing_consent" type="checkbox" value="yes"><label for="marketing_consent">Yes, I'd like to receive occasional emails from Rebel Herd Media, including Knowledge Center articles, practical business tips, company news, educational resources, and special offers. I understand I can unsubscribe at any time. <span class="hint">Optional. Not required to send this form. See our <a href="/privacy/#marketing-emails">privacy policy</a>.</span></label></div>
+<input type="hidden" name="consent_version" value="2026-11-v1"><input type="hidden" name="consent_text_sha256" value=""><input type="hidden" name="submitted_at" value="">
 <button class="btn" type="submit">Send inquiry</button>
 </form>
 <script>

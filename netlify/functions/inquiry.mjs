@@ -1,6 +1,7 @@
 // Rebel Herd Media — server-side validation for the public inquiry form.
 // Receives the POST from /contact/, validates, and forwards valid submissions
 // to Netlify Forms (form "inquiry"), so storage and email notifications are unchanged.
+import { consentStamp, brevoOptIn, failurePage } from "../lib/consent.mjs";
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 export default async (req, context) => {
@@ -32,11 +33,14 @@ export default async (req, context) => {
   const body = new URLSearchParams();
   body.set("form-name", "inquiry");
   for (const k of ["name", "email", "organization", "topic", "message"]) body.set(k, get(k));
+  const stamp = await consentStamp(get);
+  for (const [k, v] of Object.entries(stamp)) body.set(k, v);
   const target = new URL("/", req.url);
-  const res = await fetch(target, { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body });
-  if (!res.ok && res.status !== 303 && res.status !== 302) {
-    return new Response("We couldn't record your inquiry just now. Please email info@rebelherdmedia.com.", { status: 502, headers: { "content-type": "text/plain; charset=utf-8" } });
-  }
+  let res;
+  try { res = await fetch(target, { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body }); }
+  catch (e) { return failurePage("inquiry", "/contact/"); }
+  if (!res.ok && res.status !== 303 && res.status !== 302) return failurePage("inquiry", "/contact/");
+  if (stamp.marketing_consent === "yes") await brevoOptIn({ email: email.trim(), firstName: name.trim().split(/\s+/)[0], source: "inquiry", req });
   return Response.redirect(new URL("/thanks/", req.url), 303);
 };
 
