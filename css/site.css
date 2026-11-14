@@ -565,3 +565,34 @@ section{padding:72px 0}
   .art-related{border-top:1px solid #bbb;margin-top:14pt;padding-top:8pt;font-size:9.5pt;break-before:avoid}
   .article h2:last-of-type,.article h2:last-of-type+p{break-inside:avoid}
 }
+
+/* ===== Consent, initiative application, subscribe ===== */
+.field.consent{display:grid;grid-template-columns:24px 1fr;gap:12px;align-items:start;padding:14px 16px;border:1px solid #D9D1C4;border-radius:var(--r);background:#FFFDF9}
+.field.consent input{width:22px;height:22px;margin:2px 0 0;accent-color:var(--signal);padding:0}
+.field.consent label{font-weight:500;margin:0;line-height:1.45}
+.field.consent label .hint{margin:6px 0 0;font-size:13.5px}
+.field.consent.invalid{border-color:#9A2A2A;border-width:2px}
+.field.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field.two label{display:block;font-weight:600;margin-bottom:6px}
+@media (max-width:520px){.field.two{grid-template-columns:1fr}}
+.field.topics{border:0;padding:0;margin:0 0 20px}
+.field.topics legend{font-weight:600;margin-bottom:8px}
+.field.topics legend .hint{display:block}
+.field.topics label{display:flex;gap:10px;align-items:center;font-weight:400;padding:8px 0;min-height:44px}
+.field.topics input{width:20px;height:20px;accent-color:var(--signal);padding:0}
+.kc-sub{background:var(--deep,#14262B);color:var(--paper);padding:56px 20px}
+.kc-sub-in{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:48px;align-items:start}
+.kc-sub .mono{color:var(--lagoon,#4CC3BC)}
+.kc-sub h2{color:var(--paper);margin-top:8px;font-size:clamp(26px,3.4vw,36px)}
+.kc-sub p{color:#CBD5D6;margin-top:12px;max-width:46ch;font-size:17px}
+.kc-sub .form{max-width:none}
+.kc-sub .field label,.kc-sub .field legend{color:var(--paper)}
+.kc-sub .field .hint,.kc-sub .field .req{color:#AEBFC0}
+.kc-sub .field.consent{background:rgba(246,241,231,.06);border-color:rgba(246,241,231,.25)}
+.kc-sub .field.consent label{color:var(--paper);font-weight:400}
+.kc-sub .field.consent a{color:var(--lagoon,#4CC3BC)}
+.kc-sub .btn{background:var(--lagoon,#4CC3BC);color:var(--ink);border-color:var(--lagoon,#4CC3BC)}
+.kc-sub .btn:hover{background:#fff}
+@media (max-width:860px){.kc-sub{padding:44px 20px}.kc-sub-in{grid-template-columns:1fr;gap:24px}}
+#apply .form{max-width:680px}
+.page-intro .mono{font-family:'IBM Plex Mono',ui-monospace,monospace;font-weight:500;font-size:12.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--signal)}
