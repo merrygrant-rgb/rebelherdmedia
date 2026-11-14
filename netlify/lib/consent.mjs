@@ -100,15 +100,16 @@ export async function brevoOptIn({ email, firstName = "", source = "", topics = 
   } catch (e) { log("doi-failed", { source, status: "network" }); return "error:network"; }
 }
 
-/** Plain transactional email (confirmations). Callers must esc() any user-supplied text in `html`. Never throws. */
+/** Plain transactional email (confirmations). `html` is optional; omit it to send text/plain only. Callers must esc() any user-supplied text in `html`. Never throws. */
 export async function sendTransactional({ to, toName = "", subject, text, html }) {
   if (!process.env.BREVO_API_KEY || !process.env.BREVO_SENDER_EMAIL) { log("confirmation-email-skipped-not-configured", {}); return "skipped:not-configured"; }
   try {
     const r = await brevo("/smtp/email", {
       sender: { email: process.env.BREVO_SENDER_EMAIL, name: process.env.BREVO_SENDER_NAME || "Rebel Herd Media" },
-      to: [{ email: to, name: toName || undefined }],
+      // contactPixelTrackingConsent:false = never attribute opens or clicks to this person.
+      to: [{ email: to, name: toName || undefined, contactPixelTrackingConsent: false }],
       replyTo: { email: "info@rebelherdmedia.com", name: "Rebel Herd Media" },
-      subject, textContent: text, htmlContent: html,
+      subject, textContent: text, ...(html ? { htmlContent: html } : {}),
     });
     if (r.ok) return "sent";
     log("confirmation-email-failed", { status: r.status });
