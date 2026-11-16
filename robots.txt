@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /thanks/
+Disallow: /herd/thanks/
+Disallow: /knowledge-center/subscribed/
 Sitemap: https://rebelherdmedia.com/sitemap.xml
